@@ -1,6 +1,5 @@
-prown (1.0-1) UNRELEASED; urgency=low
+prown (1.0-1sci9u1) scibian9; urgency=low
 
-  * Initial release. Closes: #nnnn
-    <nnnn is the bug number of your ITP>
+  * First version release for scibian9
 
  -- MHamed Bouaziz <mhamed-externe.bouaziz@edf.fr>  Wed, 27 Mar 2019 17:09:49 +0100
