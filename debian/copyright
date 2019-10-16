@@ -1,15 +1,19 @@
-Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: prown
-Source: <url://example.com>
-#
-# Please double check copyright with the licensecheck(1) command.
+Packaged-By: Rémi Palancher <mhamed-externe.bouaziz@edf.fr>
+Packaged-Date: Fri, 7 Jul 2017 09:09:13 +0200
 
-Files:     Makefile
-           README.md
-           src/prown.c
-Copyright: __NO_COPYRIGHT_NOR_LICENSE__
-License:   __NO_COPYRIGHT_NOR_LICENSE__
-
-#----------------------------------------------------------------------------
-# Files marked as NO_LICENSE_TEXT_FOUND may be covered by the following
-# license/copyright files.
+Files: *
+Copyright: © 2013 M'hamed Bouaziz <mhamed-externe.bouaziz@edf.fr>
+License: GPL-3+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, at version 3 or later of the License.
+ .
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>
+ .
+ On Debian systems, a copy can be found in `/usr/share/common-licenses/GPL-3`.
