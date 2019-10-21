@@ -1,3 +1,9 @@
+prown (1.1-1sci8u1) scibian8; urgency=medium
+
+  * New upstream version 1.1
+
+ -- MHamed Bouaziz <mhamed-externe.bouaziz@edf.fr>  Mon, 21 Oct 2019 15:32:45 +0200
+
 prown (1.0-1sci8u2) scibian8; urgency=medium
 
   * New release version for Jessie
