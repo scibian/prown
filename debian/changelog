@@ -1,3 +1,9 @@
+prown (3.0-1sci9u1) scibian9; urgency=medium
+
+  * New upstream version 3.0
+
+ -- MHamed Bouaziz <mhamed-externe.bouaziz@edf.fr>  Thu, 14 Nov 2019 14:52:28 +0100
+
 prown (2.0-1sci9u1) scibian9; urgency=medium
 
   * New upstream version 2.0 
