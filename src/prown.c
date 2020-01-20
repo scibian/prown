@@ -33,6 +33,8 @@
 #include <grp.h>
 
 
+#define MAXLINE  1000
+
 /* static variable for verbose mode */ 
 static int verbose;
 /* number of project paths in config file */ 
@@ -52,7 +54,6 @@ void setOwner(const char *path)
 	}
 	//set rwx to user and rw to group if its not a symlink
 	struct stat buf;
-	int x = lstat (path, &buf);
 	if (!S_ISLNK(buf.st_mode))
 	{ 
 		if (chmod(path,S_IRUSR|S_IWUSR|S_IXUSR|S_IRGRP|S_IWGRP) != 0)
@@ -91,13 +92,13 @@ int projectOwner(char *basepath){
 	}
     closedir(dir);
 	return status;
-}
+}		
 
 /*
  * Read lines from config file.
  * */
 void read_str_from_config_line(char* config_line, char* val) {    
-    	char prm_name[100];
+    	char prm_name[MAXLINE];
     	sscanf(config_line, "%s %s\n", prm_name, val);
 }
 
@@ -106,17 +107,17 @@ void read_str_from_config_line(char* config_line, char* val) {
  * */
 void read_config_file(char config_filename[], char* projectsdir[]) {
 	FILE *fp;
-    	char buf[50];
+    	char buf[MAXLINE];
 	if ((fp=fopen(config_filename, "r")) == NULL) {
         	fprintf(stderr, "Failed to open config file %s \n", config_filename);
         	exit(EXIT_FAILURE);
     	}
     	while(! feof(fp)) {
-        	fgets(buf, 100, fp);
+        	fgets(buf, MAXLINE, fp);
         	if (buf[0] == '#' || strlen(buf) < 4) {
             	continue;
         	}	
-        	if (strstr(buf, "PROJECTS_DIR ")) {
+        	if (strstr(buf, "PROJECT_DIR ")) {
 				if ((projectsdir[nop] = malloc(sizeof(char) * PATH_MAX)) == NULL) {
 					printf("Unable to allocate memory \n");
 					exit(1);
@@ -134,7 +135,6 @@ void read_config_file(char config_filename[], char* projectsdir[]) {
  */
 int is_user_in_group(char group[])
 {	
-	int result = 1;
 	__uid_t uid = getuid();
 
 	struct passwd* pw = getpwuid(uid);
@@ -190,11 +190,10 @@ void usage(int status) {
 int prownProject(char* path){
 	uid_t uid=getuid();
 	char projectPath[PATH_MAX]; /* List of project paths*/
-	int validargs=0,i,j,nbarg,status;
+	int validargs=0,i;
 	char* projectsroot[PATH_MAX];
-	char real_dir[PATH_MAX], projectroot[PATH_MAX],projectname[PATH_MAX];
+	char real_dir[PATH_MAX], projectroot[PATH_MAX];
 	char group[PATH_MAX],linux_group[PATH_MAX];
-	size_t lenprojectroot;
 	struct stat sb;
 	struct group *g;
 	
@@ -203,7 +202,7 @@ int prownProject(char* path){
 	if (realpath(path, real_dir) != '\0')
 	{
 		int isInProjectPath = 0;
-		for (i=0; i<nop-1 ; i++)
+		for (i=0; i<nop ; i++)
 		{
 			int l=strlen(projectsroot[i]);
 			//if file in list of projects but not equal the project
@@ -220,20 +219,24 @@ int prownProject(char* path){
 				memcpy(group, &real_dir[l],h-l);
 				strcpy(linux_group, projectroot);
 				strcat(linux_group, group);
-				//printf("Path: %s\n",linux_group);
+			    if(verbose == 1){
+					printf("Path: %s\n",linux_group);
+			    }
 				if (stat(linux_group, &sb) == -1) {
 					perror("stat");
 					exit(EXIT_FAILURE);
 				}
-				//printf("Ownership: GID=%ld\n",(long) sb.st_gid);
+				if(verbose == 1){
+					printf("Ownership: GID=%ld\n",(long) sb.st_gid);
+				}
 				g = getgrgid((long) sb.st_gid);
 				strcpy(linux_group, g->gr_name);
-				//printf("%s\n", linux_group);
-				
+				if(verbose == 1){
+					printf("%s\n", linux_group);
+				}
+				break;
 			}
 		}
-		//calculate the real path lengh of the project
-		lenprojectroot=strlen(projectroot);
 		// if the user hasn't access to the project 
 		if (is_user_in_group(linux_group)==1) {	
 			printf("Error: permission denied for project \n");
@@ -242,7 +245,7 @@ int prownProject(char* path){
 		// if the user passed path is in the ptoject path 
 		else if (isInProjectPath == 1)
 		{
-			printf("Setting owner of %s  directory %s to %d\n", path, real_dir, uid,lenprojectroot);
+			printf("Setting owner of %s  directory %s to %d\n", path, real_dir, uid);
 			if (strlcpy(projectPath,real_dir,sizeof(projectPath)) >= sizeof(projectPath))
 				exit(1);
 			struct stat path_stat;
@@ -256,9 +259,7 @@ int prownProject(char* path){
 			{
 				setOwner(projectPath);
 			}
-			status=projectOwner(projectPath);
 			validargs=1;
-			j++;
 		}
 		//The else case is  when the passed project is not in projects path
 		else
@@ -275,7 +276,6 @@ int prownProject(char* path){
 }
 
 int main(int argc, char **argv) {
-	int validargs=0;
 	char *options = "hv";
 	int longindex;
 	int opt;
