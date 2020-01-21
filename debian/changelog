@@ -1,3 +1,9 @@
+prown (3.2-0sci8u2) scibian8; urgency=medium
+
+  * New release due to merge error. 
+
+ -- MHamed Bouaziz <mhamed-externe.bouaziz@edf.fr>  Tue, 21 Jan 2020 11:05:01 +0100
+
 prown (3.2-0sci8u1) scibian8; urgency=medium
 
   * New upstream version 3.2
