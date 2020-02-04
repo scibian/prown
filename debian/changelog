@@ -1,3 +1,9 @@
+prown (3.4-0sci8u1) scibian8; urgency=medium
+
+  * New upstream version 3.4 
+
+ -- MHamed Bouaziz <mhamed-externe.bouaziz@edf.fr>  Tue, 04 Feb 2020 16:36:29 +0100
+
 prown (3.3-0sci8u1) scibian8; urgency=medium
 
   * New upstream version 3.3
