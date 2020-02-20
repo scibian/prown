@@ -56,7 +56,7 @@ void setOwner(const char *path)
 	struct stat buf;
 	if (!S_ISLNK(buf.st_mode))
 	{ 
-		if (chmod(path,S_IRUSR|S_IWUSR|S_IXUSR|S_IRGRP|S_IWGRP) != 0)
+		if (chmod(path,S_IRUSR|S_IWUSR|S_IXUSR|S_IRGRP|S_IWGRP|S_IXGRP) != 0)
 		{
 			perror("chmod");
 			exit(EXIT_FAILURE);
@@ -192,7 +192,7 @@ int prownProject(char* path){
 	char projectPath[PATH_MAX]; /* List of project paths*/
 	int validargs=0,i;
 	char* projectsroot[PATH_MAX];
-	char real_dir[PATH_MAX], projectroot[PATH_MAX];
+	char real_dir[PATH_MAX], projectroot[PATH_MAX], projectdir[PATH_MAX];
 	char group[PATH_MAX],linux_group[PATH_MAX];
 	struct stat sb;
 	struct group *g;
@@ -217,12 +217,12 @@ int prownProject(char* path){
 					h++;
 				}
 				memcpy(group, &real_dir[l],h-l);
-				strcpy(linux_group, projectroot);
-				strcat(linux_group, group);
+				strcpy(projectdir, projectroot);
+				strcat(projectdir, group);
 			    if(verbose == 1){
-					printf("Path: %s\n",linux_group);
+					printf("Project path: %s\n",projectdir);
 			    }
-				if (stat(linux_group, &sb) == -1) {
+				if (stat(projectdir, &sb) == -1) {
 					perror("stat");
 					exit(EXIT_FAILURE);
 				}
@@ -258,6 +258,11 @@ int prownProject(char* path){
 			}
 			else
 			{
+				//chown the projectPath if it's not the projectDir
+				// because projectOwner() doesn't chown the entry path
+				// but only the chlids
+				if (strcmp(projectPath,projectdir))
+					setOwner(projectPath);
 				projectOwner(projectPath);
 			}
 			validargs=1;
