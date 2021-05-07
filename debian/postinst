@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# Apply CAP_CHOWN capability to prown
+setcap cap_chown+ep /usr/bin/prown
