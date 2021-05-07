@@ -1,3 +1,11 @@
+prown (3.7-0sci9u1) scibian9; urgency=medium
+
+  * New upstream version 3.7
+  * remove suid from binary
+  * add CAP_CHOWN capability to binary
+
+ -- Mouad BAHI <mouad-externe.bahi@edf.fr>  Fri, 07 May 2021 20:20:44 +0200
+
 prown (3.6-0sci9u1) scibian9; urgency=medium
 
   * New upstream version 3.6
