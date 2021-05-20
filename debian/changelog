@@ -1,8 +1,15 @@
+prown (3.7-0sci8u2) scibian8; urgency=medium
+
+  * remove cap_chown capability from the binary file
+  * set suid to the binary file
+
+ -- Mouad BAHI <mouad-externe.bahi@edf.fr>  Thu, 20 May 2021 20:39:04 +0200
+
 prown (3.7-0sci8u1) scibian8; urgency=medium
 
   * New upstream version 3.7
   * remove suid from binary
-  * add CAP_CHOWN capability to binary
+  * add cap_chown capability to binary
 
  -- Mouad BAHI <mouad-externe.bahi@edf.fr>  Fri, 07 May 2021 20:24:17 +0200
 
