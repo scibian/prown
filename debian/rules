@@ -16,4 +16,5 @@ override_dh_install:
 
 override_dh_fixperms: 	
 	dh_fixperms
-	chmod 755 debian/prown/usr/bin/prown
+	chmod 4755 debian/prown/usr/bin/prown
+	
