@@ -1,3 +1,11 @@
+prown (4.0-0sci9u2) scibian9; urgency=medium
+
+  * Fix lintian spelling warnings
+  * Add missing Vcs fields in d/control
+  * Add -e flag in postinst
+
+ -- Rémi Palancher <remi-externe.palancher@edf.fr>  Tue, 21 Dec 2021 17:41:07 +0100
+
 prown (4.0-0sci9u1) scibian9; urgency=medium
 
   * New upstream release 4.0
