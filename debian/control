@@ -1,8 +1,12 @@
 Source: prown
 Priority: optional
-Maintainer: M'hamed Bouaziz <mhamed-externe.bouaziz@edf.fr>
+Maintainer: Scibian Project <project@scibian.org>
 Build-Depends:
- debhelper (>= 9),libbsd-dev
+ debhelper (>= 10),
+ libbsd-dev,
+ libacl1-dev,
+ cppcheck,
+ pandoc
 Standards-Version: 3.9.6
 Section: admin
 
@@ -10,4 +14,9 @@ Package: prown
 Architecture: any
 Depends:
  ${shlibs:Depends}, ${misc:Depends}
-Description: Prown is a simple tool developed to give users the possibility to own projects. It uses the configuration file in /etc/prown.conf to specify the projects directory. When a user specify ane or multiple directories, Prown verify the user permissions and chage recursively the owner of the directory to that user.
+Description: Get ownership a projects files
+ This packages provides Prwn, a tool deisgned to give users the possibility to
+ get ownership of files in projects directories. It uses the configuration file
+ /etc/prown.conf to specify the projects directory. When a user specify one or
+ multiple directories, Prown verifoes the user permissions and change
+ recursively the owner of the directory to that user.
