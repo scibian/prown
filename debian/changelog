@@ -1,3 +1,14 @@
+prown (4.0-0sci9u1) scibian9; urgency=medium
+
+  * New upstream release 4.0
+  * Bump d/compat to 10
+  * Fix architecture of binary architecture dependant package
+  * Fix package description format
+  * Add new build-dep on libacl and pandoc
+  * Add missing dh token in postinst
+
+ -- Rémi Palancher <remi-externe.palancher@edf.fr>  Tue, 21 Dec 2021 17:20:37 +0100
+
 prown (3.8-0sci9u1) scibian9; urgency=medium
 
   * Imported Upstream version 3.8
