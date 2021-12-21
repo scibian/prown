@@ -2,7 +2,7 @@ prown (4.0-0sci9u1) scibian9; urgency=medium
 
   * New upstream release 4.0
   * Bump d/compat to 10
-  * Fix architecture of binary architecture dependant package
+  * Fix architecture of binary architecture dependent package
   * Fix package description format
   * Add new build-dep on libacl and pandoc
   * Add missing dh token in postinst
